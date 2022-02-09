@@ -10,29 +10,58 @@ data_source:
 load_data:
   row_dataset_link: https://s3.amazonaws.com/datarobot_public_datasets/DR_Demo_Lending_Club.csv
   raw_dataset_csv: raw_data.csv
+  
 
 
 split_data:
   X_train_path: x_train.csv
   y_train_path: y_train.csv
-  X_test_path: x_train.csv
-  y_test_path: y_train.csv
+  X_test_path: x_test.csv
+  y_test_path: y_test.csv
+  test_size: 0.2
+
+
+split_data_processed:
+  X_train_path: x_train.csv
+  y_train_path: y_train.csv
+  X_test_path: x_test.csv
+  y_test_path: y_test.csv
   test_size: 0.2
 
 categorical_vars:
-  - feature1
-  - feature2
-  - feature3
-  - feature4
+  emp_title: emp_title
+  emp_length: emp_length
+  home_ownership: home_ownership
+  verification_status: verification_status
+  pymnt_plan: pymnt_plan
+  Notes: Notes
+  purpose_cat: purpose_cat
+  zip_code: zip_code
+  addr_state: addr_state
+  earliest_cr_line: earliest_cr_line
+  initial_list_status: initial_list_status
+  policy_code: policy_code
+
 
 numercial_vars:
-  - feature1
-  - feature2
-  - feature3
-  - feature4
+  Id: Id
+  is_bad: is_bad
+  annual_inc: annual_inc
+  debt_to_income: debt_to_income
+  delinq_2yrs: delinq_2yrs
+  inq_last_6mths: inq_last_6mths
+  mths_since_last_delinq: mths_since_last_delinq
+  mths_since_last_record: mths_since_last_record
+  open_acc: open_acc
+  pub_rec: pub_rec
+  revol_bal: revol_bal
+  revol_util: revol_util
+  total_acc: total_acc
+  collections_12_mths_ex_med: collections_12_mths_ex_med
+  mths_since_last_major_derog: mths_since_last_major_derog
 
 
-_vars_to_transform:
+vars_to_transform:
   - feature1
   - feature2
   - feature3
@@ -68,4 +97,33 @@ reports:
   params: report/params.json
   scores: report/scores.json
 
+original_features:
+  - earliest_cr_line
+  - inq_last_6mths
+  - mths_since_last_record
+  - open_acc
+  - mths_since_last_delinq
+  - pub_rec
+  - revol_bal
+  - revol_util
+  - total_acc
+  - initial_list_status
+  - collections_12_mths_ex_med
+  - mths_since_last_major_derog
+  - policy_code
+  - Id
+  - is_bad
+  - emp_title
+  - emp_length
+  - home_ownership
+  - annual_inc
+  - verification_status
+  - pymnt_plan
+  - Notes
+  - purpose_cat
+  - purpose
+  - zip_code
+  - addr_state
+  - debt_to_income
+  - delinq_2yrs
 # model_app_dir: saved_models/model.joblib
