@@ -1,14 +1,18 @@
 # # download or generate data
+from email.policy import default
+from numpy import size
 import pandas as pd
 import argparse
+from sklearn.model_selection import train_test_split
 import yaml
 import os
+import config as cfg
+from data import raw
 
 
 
-def get_main_directory_path():
-    return os.path.dirname(__file__).split("src")[0]
-
+def join_paths(module_path, file_name):
+    return os.path.join(os.path.join(os.path.dirname(module_path.__file__), f"{file_name}"))
 
 
 def read_params_file(config_path):
@@ -21,35 +25,56 @@ def read_params_file(config_path):
 
 
 def download_data(config_path):
-    data_path = read_params_file(config_path)
-    df_data = pd.read_csv(data_path["load_data"]["row_dataset_link"])
+    file_path = config_path["load_data"]["row_dataset_link"]
+    df_data = pd.read_csv(file_path)
+    
 
-    df_data.to_csv(os.path.join(get_main_directory_path(), data_path["load_data"]["raw_dataset_csv"]))
-
-
-
+    df_data.to_csv(join_paths(raw, config_path["load_data"]["raw_dataset_csv"]))
 
 
 
-def load_datasets():
-    pass
+def load_datasets(config_path):
+    file_path = join_paths(raw, config_path["load_data"]["raw_dataset_csv"])
+    return pd.read_csv(file_path)
+    
 
 
 
-def split_datasets():
-    pass
+def split_datasets(config_path):
+    df = load_datasets(config_path)
 
+    x_train, y_train, X_test, y_test = train_test_split(df.drop(columns=config_path["base_model_params"]["target"]), df[config_path["base_model_params"]["target"]], test_size=config_path["split_data"]["test_size"], random_state=config_path["base_model_params"]["random_state"])
+    
+    x_train.to_csv(os.path.join(os.path.join(os.path.dirname(raw.__file__), config_path["split_data"]["X_train_path"])))
+    y_train.to_csv(os.path.join(os.path.join(os.path.dirname(raw.__file__), config_path["split_data"]["y_train_path"])))
 
+    X_test.to_csv(os.path.join(os.path.join(os.path.dirname(raw.__file__), config_path["split_data"]["X_test_path"])))
+    y_test.to_csv(os.path.join(os.path.join(os.path.dirname(raw.__file__), config_path["split_data"]["y_test_path"])))
+
+    return x_train, y_train, X_test, y_test
     
 
 
 
 if __name__ =='__main__':
-    config_yml_path = os.path.join(get_main_directory_path(), "config/params.yaml") 
+
+    param_file = os.path.join(os.path.dirname(cfg.__file__), "params.yaml")
+
+    config = read_params_file(param_file)
+
+    # config_yml_path = os.path.join(os.path.dirname(cfg.__file__), "params.yaml")
+    # data_path = os.path.join(os.path.dirname(raw.__file__), "raw_data.csv")
     
     parser = argparse.ArgumentParser(description="Take data path")
-    parser.add_argument("--config", default=config_yml_path)
+    parser.add_argument("--config", default=config)
+
+    # parser.add_argument("--data_path", default=data_path)
+    # parser.add_argument("--config_path", default=config_yml_path)
+
     parse_args = parser.parse_args()
 
-    data = download_data(config_path=config_yml_path)
+    # data = download_data(config_path=parse_args.config)
+    split_datasets(config_path=parse_args.config)
+
+    # x_train, y_train, X_test, y_test = split_datasets(config_path=parse_args.data_path, path_datasets=data_path.data_path)
     

@@ -1,7 +1,7 @@
 base_model_params:
   package_name: model
   random_state: 42
-  target: prediction column
+  target: is_bad
 
 data_source:
   s3_source: data/pathto.csv
@@ -9,12 +9,14 @@ data_source:
 
 load_data:
   row_dataset_link: https://s3.amazonaws.com/datarobot_public_datasets/DR_Demo_Lending_Club.csv
-  raw_dataset_csv: data/raw/raw_data.csv
+  raw_dataset_csv: raw_data.csv
 
 
 split_data:
-  train_path: data/processed/train_pathto.csv
-  test_path: data/processed/test_pathto.csv
+  X_train_path: x_train.csv
+  y_train_path: y_train.csv
+  X_test_path: x_train.csv
+  y_test_path: y_train.csv
   test_size: 0.2
 
 categorical_vars:
@@ -38,6 +40,13 @@ _vars_to_transform:
 
 
 features:
+  - feature1
+  - feature2
+  - feature3
+  - feature4
+
+
+features_to_drop:
   - feature1
   - feature2
   - feature3

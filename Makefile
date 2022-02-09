@@ -58,9 +58,16 @@ run_notebooks:
 
 ## Upload Data to remote directory
 
+
+
 ## Download Data from remote directory
 
 
 ## Test python environment is setup correctly
 test:
 	pytest -vv --cov-report term-missing --cov=app tests/*.py
+
+
+
+experiment:
+	python /home/main/Desktop/Gitrepos/loan_prediction/src/data/make_dataset.py
