@@ -38,8 +38,6 @@ def load_datasets(config_path):
     return pd.read_csv(file_path)
     
 
-
-
 def split_datasets(config_path):
     df = load_datasets(config_path)
 
@@ -67,7 +65,5 @@ if __name__ =='__main__':
     parse_args = parser.parse_args()
 
     data = download_data(config_path=parse_args.config)
-    split_datasets(config_path=parse_args.config)
-
-    # x_train, y_train, X_test, y_test = split_datasets(config_path=parse_args.data_path, path_datasets=data_path.data_path)
+    x_train, y_train, X_test, y_test = split_datasets(config_path=parse_args.config)
     

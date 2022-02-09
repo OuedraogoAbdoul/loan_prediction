@@ -70,4 +70,5 @@ test:
 
 
 experiment:
-	python src/data/make_dataset.py
+	# python src/data/make_dataset.py
+	python src/features/build_features.py
