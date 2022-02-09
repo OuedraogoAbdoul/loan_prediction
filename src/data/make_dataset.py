@@ -55,25 +55,18 @@ def split_datasets(config_path):
     
 
 
-
 if __name__ =='__main__':
 
     param_file = os.path.join(os.path.dirname(cfg.__file__), "params.yaml")
 
     config = read_params_file(param_file)
-
-    # config_yml_path = os.path.join(os.path.dirname(cfg.__file__), "params.yaml")
-    # data_path = os.path.join(os.path.dirname(raw.__file__), "raw_data.csv")
     
     parser = argparse.ArgumentParser(description="Take data path")
     parser.add_argument("--config", default=config)
 
-    # parser.add_argument("--data_path", default=data_path)
-    # parser.add_argument("--config_path", default=config_yml_path)
-
     parse_args = parser.parse_args()
 
-    # data = download_data(config_path=parse_args.config)
+    data = download_data(config_path=parse_args.config)
     split_datasets(config_path=parse_args.config)
 
     # x_train, y_train, X_test, y_test = split_datasets(config_path=parse_args.data_path, path_datasets=data_path.data_path)

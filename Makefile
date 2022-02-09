@@ -26,8 +26,8 @@ requirements:
 	$(PYTHON_INTERPRETER) -m pip install -r requirements/requirements_dev.txt
 
 ## Make Dataset
-data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
+data:
+	$(PYTHON_INTERPRETER) src/data/make_dataset.py
 
 ## Delete all compiled Python files
 clean:
@@ -47,7 +47,7 @@ build_docker_image:
 
 
 ## docker run image
-run_docker_image:
+run_docker_image: build_docker_image
 	docker run -it --entrypoint /bin/bash model
 
 
@@ -70,4 +70,4 @@ test:
 
 
 experiment:
-	python /home/main/Desktop/Gitrepos/loan_prediction/src/data/make_dataset.py
+	python src/data/make_dataset.py
