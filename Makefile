@@ -26,8 +26,8 @@ requirements:
 	$(PYTHON_INTERPRETER) -m pip install -r requirements/requirements_dev.txt
 
 ## Make Dataset
-data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
+data:
+	$(PYTHON_INTERPRETER) src/data/make_dataset.py
 
 ## Delete all compiled Python files
 clean:
@@ -47,7 +47,7 @@ build_docker_image:
 
 
 ## docker run image
-run_docker_image:
+run_docker_image: build_docker_image
 	docker run -it --entrypoint /bin/bash model
 
 
@@ -58,9 +58,16 @@ run_notebooks:
 
 ## Upload Data to remote directory
 
+
+
 ## Download Data from remote directory
 
 
 ## Test python environment is setup correctly
 test:
 	pytest -vv --cov-report term-missing --cov=app tests/*.py
+
+
+
+experiment:
+	python src/data/make_dataset.py
