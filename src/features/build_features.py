@@ -118,19 +118,36 @@ def solve_imbalance_data(df, config_path):
 
     X_smtl, y_smtl = smtomek.fit_resample(df.drop(columns=[col]), df[col])
 
-    x_train, y_train, X_test, y_test = train_test_split(X_smtl, y_smtl, test_size=config_path["split_data_processed"]["test_size"], random_state=config_path["base_model_params"]["random_state"])
+    X_train, X_test, y_train, y_test  = train_test_split(X_smtl, y_smtl, test_size=config_path["split_data_processed"]["test_size"], random_state=config_path["base_model_params"]["random_state"])
     
-    x_train.to_csv(os.path.join(os.path.join(os.path.dirname(processed.__file__), config_path["split_data_processed"]["X_train_path"])))
+    X_train.to_csv(os.path.join(os.path.join(os.path.dirname(processed.__file__), config_path["split_data_processed"]["X_train_path"])))
     y_train.to_csv(os.path.join(os.path.join(os.path.dirname(processed.__file__), config_path["split_data_processed"]["y_train_path"])))
 
     X_test.to_csv(os.path.join(os.path.join(os.path.dirname(processed.__file__), config_path["split_data_processed"]["X_test_path"])))
     y_test.to_csv(os.path.join(os.path.join(os.path.dirname(processed.__file__), config_path["split_data_processed"]["y_test_path"])))
 
 
-    return x_train, y_train, X_test, y_test
+    return X_train, y_train, X_test, y_test
+
+def feature_eng(config_path):
+
+    df = get_data(config_path)
+
+    df = extract_year_from_date(df, config_path)
+
+    df = extract_zip_codes(df, config_path)
+
+    df = encode_data(df, config_path)
+
+    df = impute_missing_values(df, config_path)
+    
+    df = scale_variables(df, config_path)
+
+    X_train, y_train, X_test, y_test = solve_imbalance_data(df, config_path)
 
 
-
+    # print(data.head())
+    return X_train, y_train, X_test, y_test
 
 if __name__ =='__main__':
     param_file = os.path.join(os.path.dirname(cfg.__file__), "params.yaml")
@@ -141,23 +158,9 @@ if __name__ =='__main__':
     parser.add_argument("--config", default=config)
 
     parse_args = parser.parse_args()
-
-    data = get_data(config_path=parse_args.config)
-
-    data = extract_year_from_date(data, config_path=parse_args.config)
-
-    data = extract_zip_codes(data, config_path=parse_args.config)
-
-    data = encode_data(data, config_path=parse_args.config)
-
-    data = impute_missing_values(data, config_path=parse_args.config)
-    
-    data = scale_variables(data, config_path=parse_args.config)
-
-    x_train, y_train, X_test, y_test = solve_imbalance_data(data, config_path=parse_args.config)
+    X_train, y_train, X_test, y_test  = feature_eng(config_path=parse_args.config)
 
 
-    # print(data.head())
     
 
     
