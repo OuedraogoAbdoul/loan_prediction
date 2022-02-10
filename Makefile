@@ -69,7 +69,6 @@ test:
 	pytest -vv --cov-report term-missing --cov=app tests/*.py
 
 
-
 experiment:
-	# python src/data/make_dataset.py
+	python src/data/make_dataset.py
 	python src/features/build_features.py
