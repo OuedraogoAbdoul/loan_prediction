@@ -67,6 +67,7 @@ run_notebooks:
 ## Test python environment is setup correctly
 test:
 	pytest -vv --cov-report term-missing --cov=app tests/*.py
+	# pytest -vv --cov-report term-missing --cov=app tests/test_data.py
 
 
 experiment:

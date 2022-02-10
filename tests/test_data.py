@@ -1,4 +1,4 @@
-from data import raw
+# from data import raw
 import config as cf
 import os
 from os.path import exists
@@ -8,11 +8,12 @@ import pytest
 
 
 param_path = os.path.join(os.path.dirname(cf.__file__), "params.yaml")
-config = read_params_file(param_path)
+param_path = os.path.join(os.path.dirname(cf.__file__), "raw_data.csv")
+# config = read_params_file(param_path)
 
-data_path = os.path.join(os.path.dirname(raw.__file__), config["load_data"]["raw_dataset_csv"])
+# data_path = os.path.join(os.path.dirname(raw.__file__), config["load_data"]["raw_dataset_csv"])
 
 
 def test_data_exist():
     
-    assert(exists(data_path) == True, "Passed test")
+    assert(exists(param_path) == True, "Passed test")
