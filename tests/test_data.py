@@ -1,4 +1,4 @@
-from data import raw
+# from data import raw
 import config as cf
 import os
 from os.path import exists
