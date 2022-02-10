@@ -17,8 +17,8 @@ jobs:
     - name: Install dependencies
       run: make requirements
       
-    - name: Run lint
-      run: make lint
+#     - name: Run lint
+#       run: make lint
       
     - name: Run test
       run: make test
