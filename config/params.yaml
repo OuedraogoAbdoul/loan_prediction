@@ -63,27 +63,6 @@ numercial_vars:
   mths_since_last_major_derog: mths_since_last_major_derog
 
 
-vars_to_transform:
-  - feature1
-  - feature2
-  - feature3
-  - feature4
-
-
-features:
-  - feature1
-  - feature2
-  - feature3
-  - feature4
-
-
-features_to_drop:
-  - feature1
-  - feature2
-  - feature3
-  - feature4
-
-
 estimators:
   LogisticRegression:
     params:
@@ -103,11 +82,15 @@ estimators:
 
 
 saved_model_dir: saved_models
+best_model_name: best_model
+best_model: True
+best_model: best_model.joblib
 
 
 reports:
   params: params.json
   scores: scores.json
+  prediction: prediction.json
 
 original_features:
   - earliest_cr_line

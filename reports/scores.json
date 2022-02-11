@@ -1,22 +1,12 @@
 [
     {
-        "LogisticRegression": {
-            "balanced_accuracy_metric": 0.7548840736900446,
-            "precision": 0.7614906832298136,
-            "recall": 0.7250147841513898,
-            "fbeta_score": 0.74280521054226,
-            "roc_auc": 0.7548840736900447,
-            "train_time(s)": 0.14156508445739746
-        }
-    },
-    {
-        "DecisionTreeClassifier": {
-            "balanced_accuracy_metric": 0.770242851232985,
-            "precision": 0.8051595383570944,
-            "recall": 0.7013601419278533,
-            "fbeta_score": 0.7496839443742098,
-            "roc_auc": 0.770242851232985,
-            "train_time(s)": 0.10603022575378418
+        "SVC": {
+            "balanced_accuracy_metric": 0.7976754076580579,
+            "precision": 0.7707531610775151,
+            "recall": 0.8290952099349498,
+            "fbeta_score": 0.798860398860399,
+            "roc_auc": 0.7976754076580579,
+            "train_time(s)": 5.241826057434082
         }
     }
 ]
