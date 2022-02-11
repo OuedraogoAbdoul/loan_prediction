@@ -62,7 +62,7 @@ def evaluation_metrics(ground_truth, pred):
 def model_experiment(config_path):
     model_dir = os.path.dirname(saved_models.__file__)
     reports_dir = os.path.dirname(reports.__file__)
-    is_best_model = config_path.get("best_model")
+    is_best_model = config_path.get("is_best_model")
     metrics_data = []
 
     scores_file = os.path.join(reports_dir ,config_path.get("reports").get("scores"))

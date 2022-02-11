@@ -22,14 +22,11 @@ stages:
     cmd: python src/models/train_model.py
     deps:
     - path: src/models/train_model.py
-      md5: a4ba6e615281d48d2f5b0703b08d8f45
-      size: 4554
+      md5: 386ae7c541305c2c04aeba1fc68193b5
+      size: 4641
   prediction:
     cmd: python src/models/predict_model.py
     deps:
-    - path: reports/scores.json
-      md5: 5bda336766285abff0c3433f6ff039d8
-      size: 325
     - path: src/models/predict_model.py
-      md5: 6be69464f60b56e0a6f868d2c5ce3555
-      size: 2324
+      md5: 8bb9b1348db2176b2d2427e718d2dcbb
+      size: 2408
