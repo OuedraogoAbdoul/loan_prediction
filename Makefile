@@ -70,9 +70,14 @@ test:
 	# pytest -vv --cov-report term-missing --cov=app tests/test_data.py
 
 
-experiment:
-	# python src/data/make_dataset.py
-	# python src/features/build_features.py
-	# python src/models/pipeline.py
-	# python src/models/train_model.py
+preprocess:
+	python src/data/make_dataset.py
+	python src/features/build_features.py
+
+train_model:
+	# dvc repro
+	python src/models/pipeline.py
+	python src/models/train_model.py
+predict:
+	# dvc repro
 	python src/models/predict_model.py

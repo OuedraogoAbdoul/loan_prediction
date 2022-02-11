@@ -1,0 +1,35 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/data/make_dataset.py
+    deps:
+    - path: src/data/make_dataset.py
+      md5: ff334a98fe9c6098016917caa32e9fed
+      size: 2249
+  feature_engineering:
+    cmd: python src/features/build_features.py
+    deps:
+    - path: src/features/build_features.py
+      md5: 8c36d3602084c392c9f11a9c12751498
+      size: 4430
+  pipeline:
+    cmd: python src/models/pipeline.py
+    deps:
+    - path: src/models/pipeline.py
+      md5: 170b9904eb0bb0bc1d7e3520c8e016ad
+      size: 1370
+  training:
+    cmd: python src/models/train_model.py
+    deps:
+    - path: src/models/train_model.py
+      md5: a4ba6e615281d48d2f5b0703b08d8f45
+      size: 4554
+  prediction:
+    cmd: python src/models/predict_model.py
+    deps:
+    - path: reports/scores.json
+      md5: 5bda336766285abff0c3433f6ff039d8
+      size: 325
+    - path: src/models/predict_model.py
+      md5: 6be69464f60b56e0a6f868d2c5ce3555
+      size: 2324

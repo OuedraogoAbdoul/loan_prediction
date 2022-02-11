@@ -41,7 +41,10 @@ def pipeline(config_path):
 
 
 if __name__=='__main__':
-    param_file = os.path.join(os.path.dirname(cfg.__file__), "params.yaml")
+    PWD = os.path.dirname(os.path.abspath(__file__))
+    ROOT = os.path.abspath(os.path.join(PWD, '../..'))
+
+    param_file = os.path.join(ROOT, "params.yaml")
 
     config = read_params_file(param_file)
     
