@@ -1,0 +1,34 @@
+stages:
+  training:
+    cmd: python src/models/train_model.py
+    deps:
+      - src/models/train_model.py
+    # params:
+    #   - random_state
+      # - passes
+    # outs:
+    #   - saved_models/best_model.joblib
+  prediction:
+    cmd: python src/models/predict_model.py
+    deps:
+      - src/models/predict_model.py
+    # params:
+    #   - threshold
+    #   - passes
+    # outs:
+    #   - reports/scores.json
+
+
+# stages:
+#   prepared:
+#     cmd: python src/data/make_dataset.py
+#     deps:
+#       # - features.csv
+#     outs:
+#       # - model.pt
+#     metrics:
+#       # - accuracy.txt:
+#           # cache: false
+#     plots:
+#       # - auc.json:
+#           # cache: false
