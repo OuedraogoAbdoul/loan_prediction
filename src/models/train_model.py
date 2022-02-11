@@ -29,6 +29,7 @@ import time
 # models
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
+from sklearn import svm
 
 
 def evaluation_metrics(ground_truth, pred):
@@ -58,21 +59,22 @@ def evaluation_metrics(ground_truth, pred):
 
 
 
-def run_training(config_path):
+def model_experiment(config_path):
     model_dir = os.path.dirname(saved_models.__file__)
     reports_dir = os.path.dirname(reports.__file__)
+    is_best_model = config_path.get("best_model")
     metrics_data = []
-
 
     scores_file = os.path.join(reports_dir ,config_path.get("reports").get("scores"))
 
     params_file = config_path.get("reports").get("params")
     random_state = config_path.get("base_model_params").get("random_state")
     
+    if(not is_best_model):
+        models = [LogisticRegression(random_state=random_state, max_iter=200), DecisionTreeClassifier(max_depth=5, min_samples_split=2)]
+    else:
+        models = [svm.SVC()]
     
-
-    models = [LogisticRegression(random_state=random_state, max_iter=200), DecisionTreeClassifier(max_depth=5, min_samples_split=2)]
-
     X_train, y_train, X_test, y_test = pipeline(config_path=parse_args.config)
     
     for model in models:
@@ -85,7 +87,15 @@ def run_training(config_path):
         pred = clf.predict(X_test)
 
         # Save model
-        model_path = os.path.join(model_dir, f"{model}.joblib")
+        if(not is_best_model):
+            model_name = f"{model}".split("(")[0]
+        else:
+            model_name = config_path.get("best_model_name")
+
+        model_path = os.path.join(model_dir, f"{model_name}.joblib")
+        
+        
+
         joblib.dump(clf, model_path)
 
         # Save evaluation metrics
@@ -119,8 +129,13 @@ def run_training(config_path):
     #     }
     #     json.dump(params, f, indent=4)
 
+
+
         
-    
+def run_training(config_path):
+
+    model_experiment(config_path)
+    # pass
     
 
 
