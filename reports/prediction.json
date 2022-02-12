@@ -1,7 +1,7 @@
 {
     "prediction_0": "Approve",
-    "prediction_1": "Reject",
-    "prediction_2": "Approve",
-    "prediction_3": "Approve",
-    "prediction_4": "Approve"
+    "prediction_1": "Approve",
+    "prediction_2": "Reject",
+    "prediction_3": "Reject",
+    "prediction_4": "Reject"
 }

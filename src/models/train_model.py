@@ -62,7 +62,7 @@ def evaluation_metrics(ground_truth, pred):
 def model_experiment(config_path):
     model_dir = os.path.dirname(saved_models.__file__)
     reports_dir = os.path.dirname(reports.__file__)
-    is_best_model = config_path.get("best_model")
+    is_best_model = config_path.get("is_best_model")
     metrics_data = []
 
     scores_file = os.path.join(reports_dir ,config_path.get("reports").get("scores"))
@@ -73,7 +73,10 @@ def model_experiment(config_path):
     if(not is_best_model):
         models = [LogisticRegression(random_state=random_state, max_iter=200), DecisionTreeClassifier(max_depth=5, min_samples_split=2)]
     else:
-        models = [svm.SVC()]
+        models = [svm.SVC(random_state=random_state, 
+                    C=config_path.get("estimators").get("SVM").get("params").get("C"), 
+                    gamma=config_path.get("estimators").get("SVM").get("params").get("gamma")
+                    )]
     
     X_train, y_train, X_test, y_test = pipeline(config_path=parse_args.config)
     

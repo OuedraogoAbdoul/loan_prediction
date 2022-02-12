@@ -3,8 +3,9 @@ stages:
     cmd: python src/models/train_model.py
     deps:
       - src/models/train_model.py
-    # params:
-    #   - random_state
+      - params.yaml
+    params:
+      - estimators.SVM.params.random_state
       # - passes
     # outs:
     #   - saved_models/best_model.joblib
