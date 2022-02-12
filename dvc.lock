@@ -21,9 +21,15 @@ stages:
   training:
     cmd: python src/models/train_model.py
     deps:
+    - path: params.yaml
+      md5: f8e526d9972056f352fd91208c7c9d7e
+      size: 2575
     - path: src/models/train_model.py
-      md5: 386ae7c541305c2c04aeba1fc68193b5
-      size: 4641
+      md5: 24f0f6c859491a55aa1256793e878dfd
+      size: 4871
+    params:
+      params.yaml:
+        estimators.SVM.params.random_state: 45
   prediction:
     cmd: python src/models/predict_model.py
     deps:

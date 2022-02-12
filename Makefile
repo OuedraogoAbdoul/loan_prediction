@@ -48,17 +48,14 @@ build_docker_image:
 
 
 ## docker run image
-run_docker_image: build_docker_image
+run_docker_entrypoint: build_docker_image
 	docker run -it --entrypoint /bin/bash model
 
 
 ## docker expose port to run notebooks
-run_notebooks:
-	docker run -it --rm -p 8822:8822 loan_default
-
-
-## Upload Data to remote directory
-
+run_predict: build_docker_image
+	# docker run model
+	docker run -p 8000:8000 -t -i model
 
 
 ## Download Data from remote directory

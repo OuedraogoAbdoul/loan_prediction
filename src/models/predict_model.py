@@ -34,18 +34,19 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 def make_prediction(config_path):
+    print("Prcessing input features")
     model_path = os.path.dirname(saved_models.__file__)
     reports_dir = os.path.dirname(reports.__file__)
 
     best_model_path = os.path.join(model_path , config_path.get("best_model"))
     prediction_path = os.path.join(reports_dir , config_path.get("reports").get("prediction"))
 
-    _, _, X_test, y_test = pipeline(config_path=parse_args.config)
+    _, _, X_test, y_test = pipeline(config_path=config_path)
 
     model = joblib.load(best_model_path)
 
-    online_data_x = X_test.head(5)
-    online_data_y = y_test.head(5)
+    online_data_x = X_test.sample(5)
+    # online_data_y = y_test.head(5)
 
     result = model.predict(online_data_x)
 
@@ -62,15 +63,8 @@ def make_prediction(config_path):
 
     
     print(prediction)
+    return prediction, online_data_x.to_json()
     
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':

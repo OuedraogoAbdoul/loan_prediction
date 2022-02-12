@@ -1,6 +1,6 @@
 base_model_params:
   package_name: model
-  random_state: 42
+  random_state: 43
   target: is_bad
 
 data_source:
@@ -67,7 +67,7 @@ estimators:
   LogisticRegression:
     params:
       solver: [newton-cg, lbfgs, liblinear, sag, saga]
-      random_state: 42
+      random_state: 43
       penalty: [l1, l2, elasticnet]
       l1_ratio: 0.4
 
@@ -77,6 +77,12 @@ estimators:
       # l1_ratio: 0.89
       alpha: 0.9
       l1_ratio: 0.4
+  SVM:
+    params:
+      random_state: 45
+      C: 1.0
+      gamma: 'scale'
+
 
 
 saved_model_dir: saved_models
