@@ -78,3 +78,7 @@ train_model:
 predict:
 	# dvc repro
 	python src/models/predict_model.py
+
+
+hello:
+	docker run --rm -d -v $(PWD):/app -p 8000:8000 model
