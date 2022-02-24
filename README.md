@@ -1,4 +1,20 @@
-MLOPS_PROJECT_TEMPLATE
+An end to end ML example structure using loan prediction
+
+```yaml
+[
+    {
+        "SVC": {
+            "balanced_accuracy_metric": 0.7893435569043885,
+            "precision": 0.7724810400866738,
+            "recall": 0.8204833141542003,
+            "fbeta_score": 0.7957589285714285,
+            "roc_auc": 0.7893435569043885,
+            "train_time(s)": 6.631224870681763
+        }
+    }
+]
+
+```
 ==============================
 
 A template for all type of machine learning settings
