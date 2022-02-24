@@ -1,5 +1,8 @@
 An end to end ML example structure using loan prediction
 
+## FastAPI json result from inference
+
+
 ```yaml
 [
     {
@@ -15,6 +18,8 @@ An end to end ML example structure using loan prediction
 ]
 
 ```
+
+
 ==============================
 
 A template for all type of machine learning settings
